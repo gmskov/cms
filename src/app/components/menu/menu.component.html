@@ -6,7 +6,7 @@
     <div class="user-view__login" *ngIf="!isUserLogin">
       <input type="text" [(ngModel)]="userName" placeholder="Enter your name:"/>
       <input type="password" [(ngModel)]="password" placeholder="Enter your password:" />
-      <a class="waves-effect waves-light btn" (click)="userLogin(userName, password)">
+      <a class="waves-effect waves-light btn" (click)="userLogin()">
         <i class="material-icons left">account_circle</i>
         Login
       </a>
