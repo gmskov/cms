@@ -1,0 +1,6 @@
+.slider {
+  margin-top: 20px;
+}
+.slides li img {
+  filter: brightness(50%);
+}

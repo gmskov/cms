@@ -1,0 +1,46 @@
+.user-view__login {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.user-view .background {
+  background-color: #eeeeee;
+}
+.user-view .background img {
+  filter: brightness(50%);
+}
+.user-view__profile-img {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  float: left;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+}
+
+.user-view__profile-img img {
+  position: absolute;
+  border: none;
+  height: 71px;
+  left: -22px;
+  top: -7px;
+  cursor: pointer;
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.weather__icon {
+  font-size: 35pt;
+}
+.weather__icon i {
+  color: #ec407a;
+}
+.weather__temp {
+  color: #ec407a;
+  font-weight: bold;
+  font-size: 24pt;
+}

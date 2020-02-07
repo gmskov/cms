@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <app-menu
+      (showWhetherEvent)="showWhether($event)"
+    ></app-menu>
+    <app-carousel></app-carousel>
+    <div class="col s12 m12 ">
+      <div class="collection">
+        <app-article *ngFor="let item of articles" [article]="item" ></app-article>
+      </div>
+    </div>
+  </div>
+</div>

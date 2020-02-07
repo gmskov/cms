@@ -1,0 +1,53 @@
+<ul id="slide-out" class="sidenav">
+  <li><div class="user-view">
+    <div class="background" >
+      <img *ngIf="isUserLogin" src="https://natworld.info/wp-content/uploads/2018/01/%D0%A1%D0%BE%D1%87%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-%D1%82%D0%B5%D0%BC%D1%83-%D0%9F%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D0%B0-900x500.jpeg">
+    </div>
+    <div class="user-view__login" *ngIf="!isUserLogin">
+      <input type="text" [(ngModel)]="name" placeholder="Enter your name:"/>
+      <input type="password" [(ngModel)]="password" placeholder="Enter your password:" />
+      <a class="waves-effect waves-light btn" (click)="userLogin(name, password)">
+        <i class="material-icons left">account_circle</i>
+        Login
+      </a>
+    </div>
+
+    <div *ngIf="isUserLogin">
+      <div class="user-view__profile-img">
+        <img src="https://i.ytimg.com/vi/Cdg-mmrVLCI/maxresdefault.jpg">
+      </div>
+      <span class="white-text name">{{ getUserName() }}</span>
+      <a href="mailto:gms.kov@gmail.com"><span class="white-text email">gms.kov@gmail.com</span></a>
+    </div>
+    <div class="user-view__login" *ngIf="isUserLogin">
+      <a class="waves-effect waves-light btn" (click)="userLogout()"><i class="material-icons left">account_circle</i>Logout</a>
+    </div>
+  </div></li>
+  <li *ngIf="isWeatherVisible">
+    <div class="weather">
+      <div class="weather__icon">
+        <i class="wi {{ iconClass }}"></i>
+      </div>
+      <div class="weather__temp">{{ weather.temp }}</div>
+    </div>
+  </li>
+  <li>
+    <a href="javascript:void(0);" (click)="showWeather()" *ngIf="!isWeatherVisible">
+      <i class="material-icons">cloud</i>
+      Show whether
+    </a>
+    <a href="javascript:void(0);" (click)="hideWeather()" *ngIf="isWeatherVisible">
+      <i class="material-icons">cloud</i>
+      Hide whether
+    </a>
+  </li>
+  <li><div class="divider"></div></li>
+</ul>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large waves-effect waves-light red sidenav-trigger" data-target="slide-out">
+    <i class="material-icons">menu</i>
+  </a>
+</div>
+
+
+
