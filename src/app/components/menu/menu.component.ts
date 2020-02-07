@@ -16,6 +16,8 @@ export class MenuComponent implements OnInit {
   iconClassArray;
   iconClass;
   isWeatherVisible;
+  userName;
+  password;
 
   constructor(private cms: CmsServiceService, private ws: WeatherServiceService) {
     this.weather = {};
@@ -60,8 +62,8 @@ export class MenuComponent implements OnInit {
   checkUserLogin(){
     this.isUserLogin = this.cms.isUserLogin();
   }
-  userLogin(name: string, password: string){
-    this.cms.userAuth(name, password);
+  userLogin(){
+    this.cms.userAuth(this.userName, this.password);
     this.checkUserLogin();
   }
 
