@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../interface/article';
 import { environment as env } from '../../environments/environment';
+import {Observable} from 'rxjs';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +26,8 @@ export class CmsServiceService {
     }
   }
 
-  getArticlesFromLocalStorage(): Array<any>{
-    return JSON.parse(localStorage.getItem('articles'));
+  getArticlesFromLocalStorage(): Observable<any[]> {
+    return of(JSON.parse(localStorage.getItem('articles')));
   }
 
   fetchArticle():Promise<any> {
