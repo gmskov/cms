@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '10'
+
+before_install:
+- npm install -g @angular/cli
+install: npm install
+
+branches:
+  only:
+  - master
+
+deploy:
+  provider: heroku
+  app: ant-cms
+  api_key:
+    secure: "be53a080-5554-43ba-b348-a34124b8f46a"
