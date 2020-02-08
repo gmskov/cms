@@ -34,7 +34,6 @@ export class WeatherServiceService {
       '&APPID=' + this.whetherApiKey)
       .pipe(map(data=>{
           return data;
-
       }));
   }
 }
