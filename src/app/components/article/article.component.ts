@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitter, Input, Output } from '@angular/core';
-import { IArticle } from '../../interface/article';
 
 @Component({
   selector: 'app-article',

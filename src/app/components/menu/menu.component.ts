@@ -3,6 +3,10 @@ import * as M from "materialize-css";
 import { EventEmitter, Output } from '@angular//core';
 import { CmsServiceService } from '../../services/cms-service.service';
 import { WeatherServiceService } from '../../services/weather-service.service';
+import { AuthService } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+
 
 @Component({
   selector: 'app-menu',
@@ -12,16 +16,24 @@ import { WeatherServiceService } from '../../services/weather-service.service';
 export class MenuComponent implements OnInit {
 
   weather;
-  isUserLogin;
   iconClassArray;
   iconClass;
   isWeatherVisible;
+  userId;
   userName;
+  userEmail;
+  isUserLogin;
   password;
+  private user: SocialUser;
+  private loggedIn: boolean;
 
-  constructor(private cms: CmsServiceService, private ws: WeatherServiceService) {
+  constructor(private cms: CmsServiceService,
+              private ws: WeatherServiceService,
+              private authService: AuthService) {
     this.weather = {};
     this.isWeatherVisible = false;
+    this.userName = this.cms.getUserName();
+    this.userEmail = this.cms.getUserMail();
     this.iconClassArray = {
       '01d': 'wi-day-sunny',
       '02d': 'wi-day-cloudy',
@@ -50,7 +62,7 @@ export class MenuComponent implements OnInit {
     this.isWeatherVisible  = !this.isWeatherVisible;
     this.showWhetherEvent.emit();
     this.ws.getWeatherByCoordinate().subscribe(data => {
-      this.weather.temp =  data.main.temp;
+      this.weather.temp =  Math.round(data.main.temp);
       this.weather.img = data.weather[0].icon;
       this.iconClass = this.iconClassArray[this.weather.img];
     });
@@ -58,29 +70,51 @@ export class MenuComponent implements OnInit {
   hideWeather(){
     this.isWeatherVisible  = !this.isWeatherVisible;
   }
-
-  checkUserLogin(){
-    this.isUserLogin = this.cms.isUserLogin();
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
+
+  signOut(): void {
+    if(this.user){
+      this.user = null;
+      this.authService.signOut();
+    }
+    this.isUserLogin = false;
+    this.userName = null;
+    this.userEmail = null;
+    this.cms.signOutUser();
+
+  }
+
   userLogin(){
-    this.cms.userAuth(this.userName, this.password);
-    this.checkUserLogin();
-  }
-
-  userLogout(){
-    this.cms.userLogout();
-    this.checkUserLogin();
-  }
-
-  getUserName(){
-    return this.cms.getUserName();
+    if(this.userName && this.password){
+      if(this.cms.checkAminLogin(this.userName, this.password)){
+        this.isUserLogin = this.cms.isUserLogin();
+        this.userName = this.cms.getUserName();
+        this.userEmail = this.cms.getUserMail();
+      }
+    }
   }
 
   ngOnInit() {
-      let menu = document.querySelectorAll('.sidenav');
-      M.Sidenav.init(menu);
-      this.checkUserLogin();
-      this.ws.getCoordinate();
+    let menu = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(menu);
+    this.ws.getCoordinate();
+
+        this.authService.authState.subscribe((user) => {
+        if(user){
+          this.userName = user.name;
+          this.userEmail = user.email;
+          this.userId = user.id;
+          this.user = user;
+          this.isUserLogin = true;
+        }
+        this.loggedIn = (user != null);
+      });
+
+    this.isUserLogin = this.cms.isUserLogin();
+
+
   }
 
 

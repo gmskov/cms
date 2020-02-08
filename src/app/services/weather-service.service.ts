@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { environment as env } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +13,7 @@ export class WeatherServiceService {
   private whetherApiKey;
 
   constructor(private http: HttpClient) {
-    this.whetherApiKey = 'f666842761b7f826269901de889af3c5';
+    this.whetherApiKey = env.whetherApiKey;
   }
 
   getCoordinate(){

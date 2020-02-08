@@ -6,7 +6,3 @@ export interface IArticle {
   Excerpt: string,
   PublishDate: string
 }
-
-export interface IUser {
-  login: string,
-}

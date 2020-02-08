@@ -6,21 +6,29 @@
     <div class="user-view__login" *ngIf="!isUserLogin">
       <input type="text" [(ngModel)]="userName" placeholder="Enter your name:"/>
       <input type="password" [(ngModel)]="password" placeholder="Enter your password:" />
-      <a class="waves-effect waves-light btn" (click)="userLogin()">
-        <i class="material-icons left">account_circle</i>
-        Login
-      </a>
+      <div class="auth-btn">
+        <a class="waves-effect waves-light btn" (click)="userLogin()">
+          <i class="material-icons left">account_circle</i>
+          Login
+        </a>
+      </div>
+      <div class="auth-btn">
+        <a class="waves-effect waves-light btn" (click)="signInWithGoogle()">
+          <i class="material-icons left">account_circle</i>
+          Google
+        </a>
+      </div>
     </div>
 
     <div *ngIf="isUserLogin">
       <div class="user-view__profile-img">
         <img src="https://i.ytimg.com/vi/Cdg-mmrVLCI/maxresdefault.jpg">
       </div>
-      <span class="white-text name">{{ getUserName() }}</span>
-      <a href="mailto:gms.kov@gmail.com"><span class="white-text email">gms.kov@gmail.com</span></a>
+      <span class="white-text name">{{ userName }}</span>
+      <a href="mailto:{{userEmail}}"><span class="white-text email">{{userEmail}}</span></a>
     </div>
     <div class="user-view__login" *ngIf="isUserLogin">
-      <a class="waves-effect waves-light btn" (click)="userLogout()"><i class="material-icons left">account_circle</i>Logout</a>
+      <a class="waves-effect waves-light btn" (click)="signOut()"><i class="material-icons left">account_circle</i>Logout</a>
     </div>
   </div></li>
   <li *ngIf="isWeatherVisible">

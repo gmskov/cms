@@ -1,4 +1,4 @@
-<a href="javascript:void(0);" class="collection-item">
+<a [routerLink]="['/news',article.id]" class="collection-item">
   <div class="article_layout">
     <div class="article_img-border">
       <img src="{{ article.urlToImage }}" class="article_img">
@@ -6,6 +6,10 @@
     <div class="article_info">
       <div class="article_title">{{ article.title }}</div>
       <div class="article_description">{{ article.description }}</div>
+      <div class="article_author">
+        <div>Author: {{ (article.author) ? article.author : 'unknown' }}</div>
+        <div>{{ article.publishedAt }}</div>
+      </div>
     </div>
   </div>
 </a>

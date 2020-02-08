@@ -18,10 +18,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cms.initLocalStorage();
-    this.cms.getArticlesFromLocalStorage().subscribe(data => {
+    this.cms.initLocalStorage().then((data)=>{
       this.articles =  data;
-    });
+    })
   }
 
 }

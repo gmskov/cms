@@ -1,0 +1,17 @@
+.layout_404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.layout_404_title{
+  font-size: 40pt;
+  color: #ff0000;
+  padding-top: 20px;
+}
+.layout_404_text{
+  font-size: 35pt;
+  color: #ff0000;
+}
+.layout_404 p {
+  font-size: 16pt;
+}

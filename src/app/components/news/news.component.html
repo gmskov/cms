@@ -1,0 +1,35 @@
+<div class="container" *ngIf="isLoaded">
+  <div class="row news-layout">
+    <div class="news-layout" *ngIf="!isEdit">
+      <div class="news-layout__title">
+        {{ news.title }}
+      </div>
+      <div class="news-layout__image">
+        <img src="{{ news.urlToImage }}" alt="">
+      </div>
+      <div>
+        <p>{{ news.content }}</p>
+      </div>
+      <div class="news-layout__author">
+        <div>Author: {{ (news.author) ? news.author : 'Unknown'}}</div>
+        <div>{{ news.publishedAt }}</div>
+      </div>
+      <button class="btn" *ngIf="canEdit" (click)="editArticle()">Edit</button>
+    </div>
+    <div *ngIf="isEdit">
+      <input type="text" [(ngModel)]="news.title">
+      <input type="text" [(ngModel)]="news.urlToImage">
+      <input type="text" [(ngModel)]="news.content">
+      <div><button class="btn" (click)="save()">Save</button></div>
+      <div><span class="updateSuccess" *ngIf="articleSave">Article save</span></div>
+      <div *ngIf="articleSave">
+        Redirect in {{ secondsToRedirect }} seconds
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+

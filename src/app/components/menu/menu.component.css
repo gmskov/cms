@@ -1,6 +1,18 @@
 .user-view__login {
   text-align: center;
   padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.auth-btn {
+  padding-bottom: 5px;
+}
+.auth-btn a {
+  width: 100%;
+}
+.user-view {
+  display: flex;
+  flex-direction: column;
 }
 .user-view .background {
   background-color: #eeeeee;

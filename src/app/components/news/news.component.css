@@ -1,0 +1,21 @@
+.news-layout {
+  margin-top: 50px;
+}
+.news-layout__author{
+  display: flex;
+  justify-content: space-between;
+  color: #26a69a;
+  font-size: 9pt;
+}
+
+.news-layout__image img {
+  width: 30%;
+}
+.news-layout__title {
+  color: #ed143d;
+  font-size: 20pt;
+  padding-bottom: 20px;
+}
+.updateSuccess {
+  color: green;
+}
