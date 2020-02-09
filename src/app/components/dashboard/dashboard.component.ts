@@ -22,20 +22,31 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  sortBy(event: any, sortByElement){
-    this.articles = this.articles.filter(function(elm) {
-      if(elm[sortByElement] != null && elm[sortByElement].toLowerCase().indexOf(event.target.value.toLowerCase()) != -1){
-        return elm;
+  sortBy(){
+    let title = this.sortByTitle;
+    let author = this.sortByAuthor;
+    let description = this.sortByDiscription;
+    let articles = JSON.parse(localStorage.getItem('articles'));
+
+    this.articles = articles.filter(function(elm) {
+      if(title && elm.title != null) {
+          if(elm.title.toLowerCase().indexOf(title.toLowerCase()) == -1){
+            elm.visible = false;
+          }
       }
+      if(author && elm.author != null) {
+        if(elm.author.toLowerCase().indexOf(author.toLowerCase()) == -1){
+          elm.visible = false;
+        }
+      }
+      if(description && elm.description != null) {
+        if(elm.description.toLowerCase().indexOf(description.toLowerCase()) == -1){
+          elm.visible = false;
+        }
+      }
+
+      return elm;
     });
-    if(event.target.value == ''){
-      this.sortByTitle = '';
-      this.sortByDiscription = '';
-      this.sortByAuthor = '';
-      this.cms.initLocalStorage().then((data)=>{
-        this.articles =  data;
-      });
-    }
   }
 
   ngOnInit() {
