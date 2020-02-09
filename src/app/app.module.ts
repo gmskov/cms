@@ -15,6 +15,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { NewsComponent } from './components/news/news.component';
 
+
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'article', component: ArticleComponent },

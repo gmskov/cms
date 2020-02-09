@@ -17,7 +17,7 @@ export class CmsServiceService {
   }
 
   initLocalStorage(): Promise<any>{
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if(!localStorage.getItem('articles')){
         this.fetchArticle().then(
           json => {
@@ -31,7 +31,8 @@ export class CmsServiceService {
                 description: elm.description,
                 urlToImage: elm.urlToImage,
                 publishedAt:  moment(elm.publishedAt).format("DD.MM.YYYY"),
-                content: elm.content
+                content: elm.content,
+                visible: true
               };
             });
             localStorage.setItem('articles', JSON.stringify(newsArray));
@@ -109,7 +110,7 @@ export class CmsServiceService {
     let newsIndex = articles.findIndex(item => item.id === +news.id);
     articles[newsIndex] = {
       id: news.id,
-      author: news.author,
+      author: (news.author != null) ? news.author : 'unknown',
       title: news.title,
       description: news.description,
       urlToImage: news.urlToImage,

@@ -1,0 +1,15 @@
+.dashboard-filter {
+  display: flex;
+  justify-content: space-around;
+}
+.dashboard-filter input{
+  width: 30%;
+}
+@media (max-width: 768px)  {
+  .dashboard-filter {
+    flex-direction: column;
+  }
+  .dashboard-filter input{
+    width: 100%;
+  }
+}

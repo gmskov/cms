@@ -1,4 +1,4 @@
-<a [routerLink]="['/news',article.id]" class="collection-item">
+<a [routerLink]="['/news',article.id]" *ngIf="article.visible" class="collection-item">
   <div class="article_layout">
     <div class="article_img-border">
       <img src="{{ article.urlToImage }}" class="article_img">
