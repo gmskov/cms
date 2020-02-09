@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as M from "materialize-css";
-import { EventEmitter, Output } from '@angular//core';
 import { CmsServiceService } from '../../services/cms-service.service';
 import { WeatherServiceService } from '../../services/weather-service.service';
 import { AuthService } from "angularx-social-login";
@@ -55,12 +54,8 @@ export class MenuComponent implements OnInit {
       '50n': 'wi-night-fog'
     };
   }
-
-  @Output() showWhetherEvent = new EventEmitter();
-
   showWeather(){
     this.isWeatherVisible  = !this.isWeatherVisible;
-    this.showWhetherEvent.emit();
     this.ws.getWeatherByCoordinate().subscribe(data => {
       this.weather.temp =  Math.round(data.main.temp);
       this.weather.img = data.weather[0].icon;
@@ -100,7 +95,6 @@ export class MenuComponent implements OnInit {
     let menu = document.querySelectorAll('.sidenav');
     M.Sidenav.init(menu);
     this.ws.getCoordinate();
-
         this.authService.authState.subscribe((user) => {
         if(user){
           this.userName = user.name;
@@ -111,11 +105,5 @@ export class MenuComponent implements OnInit {
         }
         this.loggedIn = (user != null);
       });
-
-    this.isUserLogin = this.cms.isUserLogin();
-
-
   }
-
-
 }
