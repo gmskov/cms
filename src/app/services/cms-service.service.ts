@@ -115,7 +115,8 @@ export class CmsServiceService {
       description: news.description,
       urlToImage: news.urlToImage,
       publishedAt: news.publishedAt,
-      content: news.content
+      content: news.content,
+      visible: true
     };
     localStorage.setItem('articles', JSON.stringify(articles));
   }

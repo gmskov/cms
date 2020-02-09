@@ -19,7 +19,7 @@
     <div *ngIf="isEdit">
       <input type="text" [(ngModel)]="news.title">
       <input type="text" [(ngModel)]="news.urlToImage">
-      <input type="text" [(ngModel)]="news.content">
+      <textarea rows="10" class="materialize-textarea" [(ngModel)]="news.content">{{ news.content }}</textarea>
       <div><button class="btn" (click)="save()">Save</button></div>
       <div><span class="updateSuccess" *ngIf="articleSave">Article save</span></div>
       <div *ngIf="articleSave">

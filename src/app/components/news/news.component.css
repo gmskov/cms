@@ -19,3 +19,6 @@
 .updateSuccess {
   color: green;
 }
+textarea.materialize-textarea{
+  height: 100%;
+}
