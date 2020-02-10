@@ -69,12 +69,8 @@ export class CmsServiceService {
   }
 
   isUserLogin(): boolean{
-    if(this.userName && this.userEmail){
-      return true;
-    }
-    else{
-      return false;
-    }
+    if(this.userName && this.userEmail) return true;
+    else return false;
   }
 
   getUserName(): string {
@@ -90,11 +86,6 @@ export class CmsServiceService {
     this.isUserAdmin = false;
   }
 
-  checkUserAdmin(): boolean {
-    if (this.isUserAdmin)  return this.isUserAdmin
-    return false;
-  }
-
   checkAminLogin(name, password): boolean {
     if( name === env.user && password === env.password) {
       this.userName = name;
@@ -103,6 +94,11 @@ export class CmsServiceService {
       return true;
     }
     else return false;
+  }
+
+  setUserProps(name, email){
+    this.userName = name;
+    this.userEmail = email;
   }
 
   updateNewsArticle(news): void {

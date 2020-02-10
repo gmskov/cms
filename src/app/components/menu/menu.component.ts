@@ -99,11 +99,12 @@ export class MenuComponent implements OnInit {
         if(user){
           this.userName = user.name;
           this.userEmail = user.email;
-          this.userId = user.id;
           this.user = user;
           this.isUserLogin = true;
+          this.cms.setUserProps(user.name,user.email)
         }
         this.loggedIn = (user != null);
       });
+    this.isUserLogin = this.cms.isUserLogin();
   }
 }

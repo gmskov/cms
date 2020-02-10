@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'news/:id', component: NewsComponent },
   { path: '',
     redirectTo: '/dashboard',
-    pathMatch: 'prefix'
+    pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }
 ];

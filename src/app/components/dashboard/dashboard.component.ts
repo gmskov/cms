@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   sortByTitle;
   sortByDiscription;
   sortByAuthor;
+  arrayToSport;
 
   constructor(private cms: CmsServiceService) {
     this.whether = false;
@@ -26,7 +27,7 @@ export class DashboardComponent implements OnInit {
     let title = this.sortByTitle;
     let author = this.sortByAuthor;
     let description = this.sortByDiscription;
-    let articles = JSON.parse(localStorage.getItem('articles'));
+    let articles = JSON.parse(JSON.stringify(this.arrayToSport));
 
     this.articles = articles.filter(function(elm) {
       if(title && elm.title != null) {
@@ -52,6 +53,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.cms.initLocalStorage().then((data)=>{
       this.articles =  data;
+      this.arrayToSport = JSON.parse(JSON.stringify(data));
     });
   }
 
