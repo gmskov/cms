@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as M from "materialize-css";
 import { CmsServiceService } from '../../services/cms-service.service';
+import { AuthProviderService } from '../../services/auth-provider.service';
 import { WeatherServiceService } from '../../services/weather-service.service';
 import { AuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
-
+import { EventEmitter, Output } from '@angular//core';
 
 @Component({
   selector: 'app-menu',
@@ -18,17 +19,24 @@ export class MenuComponent implements OnInit {
   iconClassArray;
   iconClass;
   isWeatherVisible;
-  userId;
   userName;
   userEmail;
   isUserLogin;
+  isUserAdmin;
   password;
+  newTitle;
+  newImageUrl;
+  newDescription;
+  newContent;
+  newAuthor;
+
   private user: SocialUser;
   private loggedIn: boolean;
 
   constructor(private cms: CmsServiceService,
               private ws: WeatherServiceService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              public auth: AuthProviderService ) {
     this.weather = {};
     this.isWeatherVisible = false;
     this.userName = this.cms.getUserName();
@@ -54,6 +62,9 @@ export class MenuComponent implements OnInit {
       '50n': 'wi-night-fog'
     };
   }
+
+  @Output() ArticleEventEmitter = new EventEmitter();
+
   showWeather(){
     this.isWeatherVisible  = !this.isWeatherVisible;
     this.ws.getWeatherByCoordinate().subscribe(data => {
@@ -77,7 +88,10 @@ export class MenuComponent implements OnInit {
     this.isUserLogin = false;
     this.userName = null;
     this.userEmail = null;
+    this.password = null;
+    this.isUserAdmin = false;
     this.cms.signOutUser();
+    this.auth.isAdmin = false;
 
   }
 
@@ -87,9 +101,23 @@ export class MenuComponent implements OnInit {
         this.isUserLogin = this.cms.isUserLogin();
         this.userName = this.cms.getUserName();
         this.userEmail = this.cms.getUserMail();
+        this.isUserAdmin = true;
+        this.auth.isAdmin = true;
       }
     }
   }
+  saveNewArticle(): void{
+    this.cms.saveNewArticle(
+      this.newTitle,
+      this.newImageUrl,
+      this.newDescription,
+      this.newContent,
+      this.newAuthor).then(()=>{
+      this.ArticleEventEmitter.emit(true);
+    })
+
+  }
+
 
   ngOnInit() {
     let menu = document.querySelectorAll('.sidenav');
@@ -106,5 +134,9 @@ export class MenuComponent implements OnInit {
         this.loggedIn = (user != null);
       });
     this.isUserLogin = this.cms.isUserLogin();
+    this.isUserAdmin = this.auth.isAdmin;
+
+    var elems = document.querySelectorAll('.modal');
+    M.Modal.init(elems);
   }
 }

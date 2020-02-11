@@ -15,12 +15,12 @@
         <div>Author: {{ (news.author) ? news.author : 'Unknown'}}</div>
         <div>{{ news.publishedAt }}</div>
       </div>
-      <button class="btn" *ngIf="canEdit" (click)="editArticle()">Edit</button>
+      <button class="btn" *ngIf="auth.isAdmin" (click)="editArticle()">Edit</button>
     </div>
     <div *ngIf="isEdit">
-      <input type="text" [(ngModel)]="news.title">
-      <input type="text" [(ngModel)]="news.urlToImage">
-      <textarea rows="10" class="materialize-textarea" [(ngModel)]="news.content">{{ news.content }}</textarea>
+      <input type="text" [(ngModel)]="news.title" placeholder="Enter Title:">
+      <input type="text" [(ngModel)]="news.urlToImage" placeholder="Enter Image Url:">
+      <textarea rows="10" class="materialize-textarea" placeholder="Enter Content:" [(ngModel)]="news.content">{{ news.content }}</textarea>
       <div><button class="btn" (click)="save()">Save</button></div>
       <div><span class="updateSuccess" *ngIf="articleSave">Article save</span></div>
       <div *ngIf="articleSave">

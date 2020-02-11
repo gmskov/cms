@@ -18,11 +18,6 @@ export class DashboardComponent implements OnInit {
     this.whether = false;
   }
 
-  showWhether(visible){
-    this.whether = visible;
-  }
-
-
   sortBy(){
     let title = this.sortByTitle;
     let author = this.sortByAuthor;
@@ -50,11 +45,21 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  reloadArticle(completed): void {
+    if(completed){
+      this.loadArlicle();
+    }
+  }
+
+  loadArlicle(): void {
     this.cms.initLocalStorage().then((data)=>{
       this.articles =  data;
       this.arrayToSport = JSON.parse(JSON.stringify(data));
     });
+  }
+
+  ngOnInit() {
+    this.loadArlicle();
   }
 
 }

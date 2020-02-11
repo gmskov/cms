@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CmsServiceService } from '../../services/cms-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthProviderService } from '../../services/auth-provider.service';
 
 @Component({
   selector: 'app-news',
@@ -17,7 +18,10 @@ export class NewsComponent implements OnInit {
   articleSave;
   secondsToRedirect;
 
-  constructor(private cms: CmsServiceService, private route: ActivatedRoute, private router: Router) {
+  constructor(private cms: CmsServiceService,
+              private route: ActivatedRoute,
+              private router: Router,
+              public auth: AuthProviderService) {
     this.isLoaded = false;
     this.isEdit = false;
     this.articleSave = false;
@@ -40,18 +44,18 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(data => {
-      this.cms.getNewsById(data.get('id')).then((news)=>{
-        if(news){
-          this.newsId = news.id;
-          this.news = news;
-          this.isLoaded = true;
-        }
-      })
-    });
-    if(this.cms.checkIsUserAdmin()){
-      this.canEdit =true;
-    }
+      this.route.paramMap.subscribe(data => {
+        this.cms.getNewsById(data.get('id')).then((news)=>{
+          if(news){
+            this.newsId = news.id;
+            this.news = news;
+            this.isLoaded = true;
+          }
+        })
+      });
+      if(this.cms.checkIsUserAdmin()){
+        this.canEdit = true;
+      }
     }
 
 }

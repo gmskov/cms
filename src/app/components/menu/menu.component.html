@@ -7,13 +7,13 @@
       <input type="text" [(ngModel)]="userName" placeholder="Enter your name:"/>
       <input type="password" [(ngModel)]="password" placeholder="Enter your password:" />
       <div class="auth-btn">
-        <a class="waves-effect waves-light btn" (click)="userLogin()">
+        <a class="waves-light btn" (click)="userLogin()">
           <i class="material-icons left">account_circle</i>
           Login
         </a>
       </div>
       <div class="auth-btn">
-        <a class="waves-effect waves-light btn" (click)="signInWithGoogle()">
+        <a class="waves-light btn" (click)="signInWithGoogle()">
           <i class="material-icons left">account_circle</i>
           Google
         </a>
@@ -56,11 +56,33 @@
       Dashboard
     </a>
   </li>
+  <li *ngIf="isUserAdmin">
+    <a href="javascript:void(0);" data-target="modal" class="modal-trigger">
+      <i class="material-icons">add_circle_outline</i>
+      Add news
+    </a>
+  </li>
 </ul>
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large waves-effect waves-light red sidenav-trigger" data-target="slide-out">
     <i class="material-icons">menu</i>
   </a>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h4>New Article</h4>
+    <div>
+      <input type="text" [(ngModel)]="newAuthor" placeholder="Enter Author:">
+      <input type="text" [(ngModel)]="newTitle" placeholder="Enter Title:">
+      <input type="text" [(ngModel)]="newImageUrl" placeholder="Enter Image Url:">
+      <input type="text" [(ngModel)]="newDescription" placeholder="Enter Description:">
+      <textarea rows="10" class="materialize-textarea" [(ngModel)]="newContent" placeholder="Enter Content:"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:void(0);" (click)="saveNewArticle()" class="modal-close waves-effect waves-green btn-flat">Save</a>
+  </div>
 </div>
 
 

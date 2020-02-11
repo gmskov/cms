@@ -14,7 +14,7 @@ import { ArticleComponent } from './components/article/article.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { NewsComponent } from './components/news/news.component';
-
+import { AuthProviderService } from './services/auth-provider.service';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -57,6 +57,7 @@ export function provideConfig() {
     SocialLoginModule
   ],
   providers: [
+    AuthProviderService,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

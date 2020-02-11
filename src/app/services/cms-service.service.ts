@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment as env } from '../../environments/environment';
 import * as moment from 'moment';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -115,5 +116,24 @@ export class CmsServiceService {
       visible: true
     };
     localStorage.setItem('articles', JSON.stringify(articles));
+  }
+
+  saveNewArticle(newTitle, newImageUrl, newDescription, newContent, newAuthor): Promise<any>{
+    return new Promise((resolve) => {
+      let arrayOfNews = JSON.parse(localStorage.getItem('articles'));
+      let newArticle = {
+        id: arrayOfNews[arrayOfNews.length - 1].id++,
+        author: newAuthor,
+        title: newTitle,
+        description: newDescription,
+        urlToImage: newImageUrl,
+        publishedAt: moment().format("DD.MM.YYYY"),
+        content: newContent,
+        visible: true
+      };
+      arrayOfNews.unshift(newArticle);
+      localStorage.setItem('articles', JSON.stringify(arrayOfNews));
+      resolve();
+    })
   }
 }
